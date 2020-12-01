@@ -41,6 +41,20 @@ const SIZE: STYLE = {
   },
 };
 
+const defaultStyle = {
+  ...SHADOW,
+  backgroundColor: '#fff',
+  borderColor: '#ebedf0',
+  borderWidth: 1,
+  opacity: 1,
+  borderRadius: 0,
+  height: 44,
+  color: '#000',
+  paddingHorizontal: 15,
+  lineHeight: 44,
+  fontSize: 14,
+};
+
 export function combineTheme(
   type: string,
   plain: boolean,
@@ -48,19 +62,7 @@ export function combineTheme(
   round: boolean,
   size: string,
 ): STYLE {
-  let defaultStyle = {
-    ...SHADOW,
-    backgroundColor: '#fff',
-    borderColor: '#ebedf0',
-    borderWidth: 1,
-    opacity: 1,
-    borderRadius: 0,
-    height: 44,
-    color: '#000',
-    paddingHorizontal: 15,
-    lineHeight: 44,
-    fontSize: 14,
-  };
+  let combineStyle = {};
   let themes = [];
   if (Object.keys(THEME).includes(type)) {
     let theme = {
@@ -99,7 +101,7 @@ export function combineTheme(
     };
     themes.push(theme);
   }
-  defaultStyle = Object.assign({}, defaultStyle, ...themes);
+  combineStyle = Object.assign({}, defaultStyle, ...themes);
 
-  return defaultStyle;
+  return combineStyle;
 }

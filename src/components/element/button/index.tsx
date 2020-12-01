@@ -37,7 +37,7 @@ export default function Ibutton(props: ButtonProps) {
     round,
     size,
     style,
-  } = Object.assign({}, defaultProps, props);
+  } = {...defaultProps, ...props};
 
   const styles = combineTheme(type, plain, disabled, round, size);
 
