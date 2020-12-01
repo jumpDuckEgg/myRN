@@ -15,6 +15,16 @@ interface ButtonProps {
 }
 
 const defaultPressCallback = () => {};
+const defaultProps = {
+  type: 'default',
+  plain: false,
+  disabled: false,
+  round: false,
+  size: 'normal',
+  style: {},
+  onPress: defaultPressCallback,
+  onLongPress: defaultPressCallback,
+};
 
 export default function Ibutton(props: ButtonProps) {
   const {
@@ -27,19 +37,7 @@ export default function Ibutton(props: ButtonProps) {
     round,
     size,
     style,
-  } = Object.assign(
-    {
-      type: 'default',
-      plain: false,
-      disabled: false,
-      round: false,
-      size: 'normal',
-      style: {},
-      onPress: defaultPressCallback,
-      onLongPress: defaultPressCallback,
-    },
-    props,
-  );
+  } = Object.assign({}, defaultProps, props);
 
   const styles = combineTheme(type, plain, disabled, round, size);
 
