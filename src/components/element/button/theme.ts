@@ -1,4 +1,6 @@
-import {STYLE} from './interface';
+interface STYLE {
+  [typs: string]: string | Object;
+}
 
 const THEME: STYLE = {
   primary: '#07c160',
@@ -39,27 +41,6 @@ const SIZE: STYLE = {
   },
 };
 
-function deepSimpleClone(target: any, param: any) {
-  let keys = Object.keys(target);
-  let paramKeys = Object.keys(param);
-  paramKeys.forEach((key) => {
-    if (!target[key]) {
-      target[key] = param[key];
-    }
-  });
-  keys.forEach((key) => {
-    if (!param[key]) {
-      return;
-    }
-    if (typeof target[key] === 'object') {
-      target[key] = deepSimpleClone(target[key], param[key]);
-    } else {
-      target[key] = param[key];
-    }
-  });
-  return target;
-}
-
 export function combineTheme(
   type: string,
   plain: boolean,
@@ -80,34 +61,35 @@ export function combineTheme(
     lineHeight: 44,
     fontSize: 14,
   };
+  let themes = [];
   if (Object.keys(THEME).includes(type)) {
     let theme = {
       backgroundColor: THEME[type],
       borderColor: THEME[type],
       color: '#fff',
     };
-    defaultStyle = deepSimpleClone(defaultStyle, theme);
+    themes.push(theme);
   }
   if (plain) {
     let theme = {
       backgroundColor: '#fff',
       color: THEME[type],
     };
-    defaultStyle = deepSimpleClone(defaultStyle, theme);
+    themes.push(theme);
   }
   if (disabled) {
     let theme = {
       opacity: 0.5,
       borderWidth: 0,
     };
-    defaultStyle = deepSimpleClone(defaultStyle, theme);
+    themes.push(theme);
   }
 
   if (round) {
     let theme = {
       borderRadius: 30,
     };
-    defaultStyle = deepSimpleClone(defaultStyle, theme);
+    themes.push(theme);
   }
 
   if (size) {
@@ -115,7 +97,9 @@ export function combineTheme(
       height: SIZEHEIGHT[size],
       ...(SIZE[size] as Object),
     };
-    defaultStyle = deepSimpleClone(defaultStyle, theme);
+    themes.push(theme);
   }
+  defaultStyle = Object.assign({}, defaultStyle, ...themes);
+
   return defaultStyle;
 }

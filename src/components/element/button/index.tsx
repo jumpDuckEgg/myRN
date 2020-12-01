@@ -1,7 +1,6 @@
 import React from 'react';
 import {Pressable, Text} from 'react-native';
 import {combineTheme} from './theme';
-import {STYLE} from './interface';
 interface ButtonProps {
   title?: string;
   onPress?: any;
@@ -42,7 +41,7 @@ export default function Ibutton(props: ButtonProps) {
     props,
   );
 
-  const styles: STYLE = combineTheme(type, plain, disabled, round, size);
+  const styles = combineTheme(type, plain, disabled, round, size);
 
   return (
     <Pressable
