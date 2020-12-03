@@ -1,10 +1,10 @@
 import React from 'react';
-import {Pressable, Text} from 'react-native';
+import {Pressable, Text, PressableProps} from 'react-native';
 import {combineTheme} from './theme';
 interface ButtonProps {
   title?: string;
-  onPress?: any;
-  onLongPress?: any;
+  onPress?: PressableProps['onPress'];
+  onLongPress?: PressableProps['onLongPress'];
   color?: string;
   disabled?: boolean;
   type?: string;

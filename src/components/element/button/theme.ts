@@ -56,14 +56,14 @@ const defaultStyle = {
 };
 
 const tileToObject = (style: object) => {
-  let tempObject = {}
+  let tempObject = {};
   if (Array.isArray(style)) {
     Object.assign(tempObject, ...style);
   } else {
     Object.assign(tempObject, style);
   }
   return tempObject;
-}
+};
 
 export function combineTheme(
   type: string,
@@ -71,7 +71,7 @@ export function combineTheme(
   disabled: boolean,
   round: boolean,
   size: string,
-  style: object
+  style: object,
 ): STYLE {
   let combineStyle = {};
   let themes = [];
@@ -112,7 +112,12 @@ export function combineTheme(
     };
     themes.push(theme);
   }
-  combineStyle = Object.assign({}, defaultStyle, ...themes, tileToObject(style));
+  combineStyle = Object.assign(
+    {},
+    defaultStyle,
+    ...themes,
+    tileToObject(style),
+  );
 
   return combineStyle;
 }
