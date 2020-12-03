@@ -39,7 +39,7 @@ export default function Ibutton(props: ButtonProps) {
     style,
   } = {...defaultProps, ...props};
 
-  const styles = combineTheme(type, plain, disabled, round, size);
+  const styles = combineTheme(type, plain, disabled, round, size, style);
 
   return (
     <Pressable
@@ -51,7 +51,7 @@ export default function Ibutton(props: ButtonProps) {
           opacity: pressed ? 0.7 : 1,
         },
       ]}>
-      <Text style={[styles, style]}>{title}</Text>
+      <Text style={styles}>{title}</Text>
     </Pressable>
   );
 }

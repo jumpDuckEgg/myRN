@@ -55,16 +55,27 @@ const defaultStyle = {
   fontSize: 14,
 };
 
+const tileToObject = (style: object) => {
+  let tempObject = {}
+  if (Array.isArray(style)) {
+    Object.assign(tempObject, ...style);
+  } else {
+    Object.assign(tempObject, style);
+  }
+  return tempObject;
+}
+
 export function combineTheme(
   type: string,
   plain: boolean,
   disabled: boolean,
   round: boolean,
   size: string,
+  style: object
 ): STYLE {
   let combineStyle = {};
   let themes = [];
-  if (Object.keys(THEME).includes(type)) {
+  if (THEME[type]) {
     let theme = {
       backgroundColor: THEME[type],
       borderColor: THEME[type],
@@ -101,7 +112,7 @@ export function combineTheme(
     };
     themes.push(theme);
   }
-  combineStyle = Object.assign({}, defaultStyle, ...themes);
+  combineStyle = Object.assign({}, defaultStyle, ...themes, tileToObject(style));
 
   return combineStyle;
 }
